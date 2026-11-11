@@ -1,0 +1,232 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  color-scheme: light;
+  /* Palette from jp2waterloo.ca: white surfaces, black text, royal-blue
+     #020587 brand accent, gold + navy straight from the parish crest. */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.14 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.14 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.14 0 0);
+  --primary: oklch(0.287 0.192 264.7);          /* #020587 royal blue */
+  --primary-foreground: oklch(0.93 0.047 89.6); /* #f4e7c5 crest cream-gold */
+  --secondary: oklch(0.917 0.004 236.5);         /* #E1E4E6 site blue-grey */
+  --secondary-foreground: oklch(0.14 0 0);
+  --muted: oklch(0.961 0 0);                    /* #f2f2f2 page grey */
+  --muted-foreground: oklch(0.542 0 0);         /* #6f6f6f */
+  --accent: oklch(0.917 0.004 236.5);
+  --accent-foreground: oklch(0.14 0 0);
+  --destructive: oklch(0.633 0.167 23.6);       /* #DD5857 site coral */
+  --border: oklch(0.904 0.006 275);             /* #dedfe3 */
+  --input: oklch(0.904 0.006 275);
+  --ring: oklch(0.287 0.192 264.7);
+  --chart-1: oklch(0.287 0.192 264.7);          /* royal blue */
+  --chart-2: oklch(0.838 0.121 102.4);          /* #d9cd6b ochre gold */
+  --chart-3: oklch(0.271 0.075 278.1);           /* #1f214a crest navy */
+  --chart-4: oklch(0.542 0 0);                  /* #6f6f6f */
+  --chart-5: oklch(0.633 0.167 23.6);           /* coral */
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.14 0 0);
+  --sidebar-primary: oklch(0.287 0.192 264.7);
+  --sidebar-primary-foreground: oklch(0.93 0.047 89.6);
+  --sidebar-accent: oklch(0.917 0.004 236.5);
+  --sidebar-accent-foreground: oklch(0.14 0 0);
+  --sidebar-border: oklch(0.904 0.006 275);
+  --sidebar-ring: oklch(0.287 0.192 264.7);
+}
+
+.dark {
+  /* Matching dark theme: the parish crest at night — deep navy surfaces
+     lifted from the crest blues, cream-gold text, and the crest gold
+     taking over as the action colour. */
+  --background: oklch(0.179 0.039 279.4);         /* #0e0f22 crest navy */
+  --foreground: oklch(0.97 0.01 93.6);            /* #f7f5ee cream */
+  color-scheme: dark;
+  --card: oklch(0.226 0.05 278.3);               /* #171933 */
+  --card-foreground: oklch(0.97 0.01 93.6);
+  --popover: oklch(0.226 0.05 278.3);
+  --popover-foreground: oklch(0.97 0.01 93.6);
+  --primary: oklch(0.853 0.108 96.5);            /* #e3cf7a crest gold */
+  --primary-foreground: oklch(0.165 0.037 279);  /* #0b0c1e deep navy */
+  --secondary: oklch(0.277 0.06 279);            /* #222445 */
+  --secondary-foreground: oklch(0.97 0.01 93.6);
+  --muted: oklch(0.254 0.045 279);               /* #1e2038 */
+  --muted-foreground: oklch(0.725 0.036 281.8);  /* #a2a4bd */
+  --accent: oklch(0.277 0.06 279);
+  --accent-foreground: oklch(0.97 0.01 93.6);
+  --destructive: oklch(0.701 0.154 23.2);        /* #ef7370 coral, lifted */
+  --border: oklch(0.306 0.054 279.8);            /* #2a2c4a navy hairline */
+  --input: oklch(0.33 0.055 279);
+  --ring: oklch(0.838 0.121 102.4);              /* #d9cd6b gold */
+  --chart-1: oklch(0.65 0.16 265);               /* periwinkle blue */
+  --chart-2: oklch(0.853 0.108 96.5);            /* gold */
+  --chart-3: oklch(0.725 0.036 281.8);           /* blue-grey */
+  --chart-4: oklch(0.701 0.154 23.2);            /* coral */
+  --chart-5: oklch(0.45 0.08 279);               /* navy, lifted */
+  --sidebar: oklch(0.226 0.05 278.3);
+  --sidebar-foreground: oklch(0.97 0.01 93.6);
+  --sidebar-primary: oklch(0.853 0.108 96.5);
+  --sidebar-primary-foreground: oklch(0.165 0.037 279);
+  --sidebar-accent: oklch(0.277 0.06 279);
+  --sidebar-accent-foreground: oklch(0.97 0.01 93.6);
+  --sidebar-border: oklch(0.306 0.054 279.8);
+  --sidebar-ring: oklch(0.838 0.121 102.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================================
+   Liturgical reading pane — ported from the iBreviary APK's own
+   stylesheets (assets/Default.css, Night.css, Accessible.css,
+   Old.css + Garamond.ttf). The upstream content HTML uses these
+   class names, so the port has to keep them verbatim.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Garamond';
+  src: url('/fonts/Garamond.ttf') format('truetype');
+  font-display: swap;
+}
+
+.liturgy {
+  --liturgy-size: 17px;
+  font-size: var(--liturgy-size);
+  line-height: 1.7;
+  padding: 0 1.25rem 3rem;
+  overflow-wrap: break-word;
+}
+
+.liturgy p { margin: 0.85rem 0; }
+.liturgy hr { border: 0; border-top: 1px solid currentColor; opacity: 0.35; margin: 1.2rem auto; width: 28%; }
+.liturgy a { color: inherit; text-decoration: underline; text-decoration-style: dotted; }
+.liturgy em { font-style: italic; }
+
+.liturgy .sezione {
+  color: #dc2300;
+  text-transform: uppercase;
+  font-size: 1.6em;
+  text-align: center;
+  margin: 1rem 0;
+}
+.liturgy .titolo {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.liturgy .capolettera_grande { color: #dc2300; font-size: 1.6em; }
+.liturgy .capolettera_piccolo { color: #dc2300; font-size: 1.2em; font-weight: bolder; }
+.liturgy .paragrafo_grande { font-weight: bolder; font-size: 1.25em; }
+.liturgy .paragrafo_piccolo { font-weight: bolder; font-size: 1.05em; }
+.liturgy .risposta { font-weight: bolder; }
+
+.liturgy-default { background: #ffffff; color: #1a1a1a; }
+.liturgy-default .rubrica { color: #dc2300; }
+.liturgy-default .citazione { color: #710000; }
+
+.liturgy-night { background: #000000; color: #ffffff; }
+.liturgy-night .sezione { color: #ff2300; }
+.liturgy-night .capolettera_grande { color: #ff2300; }
+.liturgy-night .capolettera_piccolo { color: #ff2300; }
+.liturgy-night .rubrica { color: #ff2300; }
+.liturgy-night .citazione { color: #ff0000; }
+
+/* Accessible: 1.5x base size, black rubrics — high-contrast legibility */
+.liturgy-accessible { background: #ffffff; color: #000000; --liturgy-size: 25px; }
+.liturgy-accessible .sezione { color: #dc2300; }
+.liturgy-accessible .capolettera_grande { color: #dc2300; font-size: 1.8em; }
+.liturgy-accessible .capolettera_piccolo { color: #dc2300; font-size: 1.4em; }
+.liturgy-accessible .paragrafo_grande { font-size: 1.5em; }
+.liturgy-accessible .paragrafo_piccolo { font-size: 1.25em; }
+.liturgy-accessible .rubrica { color: #000; }
+.liturgy-accessible .citazione { color: #000; }
+
+/* Old: the app's sepia missal look with its bundled Garamond */
+.liturgy-old {
+  background: #ffeac4;
+  color: #2b2416;
+  font-family: 'Garamond', 'Georgia', serif;
+}
+.liturgy-old .sezione { color: #dc2300; }
+.liturgy-old .rubrica { color: #dc2300; }
+.liturgy-old .citazione { color: #710000; }
+
+/* Dark-theme variants of the reading pane. The APK shipped Night.css for
+   exactly this purpose; here the same four styles follow the site theme
+   whenever .dark is on <html> (set by next-themes). Default goes
+   transparent so the text sits on whatever surface the view provides. */
+.dark .liturgy-default { background: transparent; color: #ececec; }
+.dark .liturgy-default .sezione { color: #ff5540; }
+.dark .liturgy-default .capolettera_grande { color: #ff5540; }
+.dark .liturgy-default .capolettera_piccolo { color: #ff5540; }
+.dark .liturgy-default .rubrica { color: #ff5540; }
+.dark .liturgy-default .citazione { color: #ff8a73; }
+
+.dark .liturgy-old { background: #2b2416; color: #e8dab8; }
+.dark .liturgy-old .sezione { color: #ff6a4d; }
+.dark .liturgy-old .rubrica { color: #ff6a4d; }
+.dark .liturgy-old .citazione { color: #ffb096; }
+
+.dark .liturgy-accessible { background: #000000; color: #ffffff; }
+.dark .liturgy-accessible .sezione { color: #ff2300; }
+.dark .liturgy-accessible .capolettera_grande { color: #ff2300; }
+.dark .liturgy-accessible .capolettera_piccolo { color: #ff2300; }
+.dark .liturgy-accessible .rubrica { color: #ff2300; }
+.dark .liturgy-accessible .citazione { color: #ff5c47; }
+
+/* thin scrollbar for the fixed-text browsers */
+.slim-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.slim-scroll::-webkit-scrollbar-thumb { background: rgba(120, 120, 120, 0.45); border-radius: 3px; }
+.slim-scroll::-webkit-scrollbar-track { background: transparent; }
+.dark .slim-scroll::-webkit-scrollbar-thumb { background: rgba(190, 190, 190, 0.35); }
