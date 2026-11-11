@@ -1,9 +1,11 @@
 # Deploying iBreviary Web to Render.com (free)
 
 This site is a static-friendly Next.js app with a thin Node backend (the API
-proxy under `src/app/api/ibreviary/*`). It needs **no database, no
-environment variables, and no extra services** — the free Render plan is
-enough. A `render.yaml` blueprint is included so deployment is a few clicks.
+proxy under `src/app/api/ibreviary/*`). It needs **no database, no secrets,
+and no extra services** — the free Render plan is enough. A `render.yaml`
+blueprint is included so deployment is a few clicks. The start command
+(`npm run start`) runs `server.js`, a wrapper that pins the bind address to
+`0.0.0.0` — the one setting Render genuinely requires.
 
 ---
 
@@ -52,7 +54,9 @@ Dashboard → **New** → **Web Service** → connect the repo, then set:
 | Start command  | `npm run start`                            |
 | Instance type  | **Free**                                   |
 
-No environment variables are needed. Leave the rest at the defaults.
+No environment variables are needed — `server.js` handles the bind address
+for you (`render.yaml` also sets `HOSTNAME=0.0.0.0` as belt-and-braces).
+Leave the rest at the defaults.
 
 ## 3. What you get
 
@@ -78,13 +82,15 @@ No environment variables are needed. Leave the rest at the defaults.
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build (also runs standalone packaging)
-npm run start    # serves the standalone build on $PORT (default 3000)
+npm run start    # serves the standalone build on $PORT (default 3000),
+                 # bound to 0.0.0.0 via server.js — same as on Render
 ```
 
 ## 5. Troubleshooting
 
 | Symptom | Fix |
 | --- | --- |
+| **502 Bad Gateway** (deploy went live, site unreachable) | The standalone server was binding to the container's `HOSTNAME` instead of `0.0.0.0`, so Render's router could not reach it. Fixed in this source: `npm run start` runs `server.js`, which forces the `0.0.0.0` bind. For a **service you already created**: Dashboard → your service → **Environment** → add `HOSTNAME` = `0.0.0.0` → save (triggers a redeploy) — no code change needed. You can confirm the old failure in **Logs**: `Failed to start server … getaddrinfo ENOTFOUND`. |
 | Build fails with `next: not found` | Make sure the build command is exactly `npm install && npm run build` (npm puts `next` on the PATH). |
 | Build fails on memory (exit 137) | Rare with Turbopack; re-run the deploy once. If it persists, use a Starter instance for one build, then switch back to Free. |
 | Service up but page empty | Check logs: the app needs outbound internet to reach `www.ibreviary.com` — always available on Render. |

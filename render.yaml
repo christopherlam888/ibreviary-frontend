@@ -1,10 +1,12 @@
 # Render.com Blueprint — deploy iBreviary Web as a free web service.
 # Docs: https://render.com/docs/blueprints
 #
-# Everything the app needs is in the repo: no database, no environment
-# variables, no build tools beyond npm. Render builds with
-# `npm install && npm run build` and serves with `npm run start`
-# (node .next/standalone/server.js — listens on $PORT automatically).
+# Everything the app needs is in the repo: no database, no secrets, no
+# build tools beyond npm. Render builds with `npm install && npm run
+# build` and serves with `npm run start`, which runs server.js — a
+# wrapper that binds the standalone server to 0.0.0.0 (Render's routers
+# require it; a stray HOSTNAME env var otherwise causes 502s) and still
+# listens on $PORT, which Render sets automatically.
 services:
   - type: web
     name: ibreviary-web
@@ -13,3 +15,8 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npm run start
     healthCheckPath: /
+    envVars:
+      - key: HOSTNAME
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
